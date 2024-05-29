@@ -1,7 +1,10 @@
-import { Stack } from "expo-router";
+import { Redirect } from "expo-router";
+import { useState } from "react";
 import { Text, View } from "react-native";
 
 export default function Index() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <View
       style={{
@@ -10,7 +13,11 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      {isLoggedIn ? (
+        <Text>Edit app/index.tsx to edit this screen.</Text>
+      ) : (
+        <Redirect href="register" />
+      )}
     </View>
   );
 }
