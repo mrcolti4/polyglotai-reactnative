@@ -1,37 +1,48 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleProp, StyleSheet, StyleSheetProperties, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 import React from "react";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface ButtonProps {
   children: React.ReactNode;
   disabled: boolean;
+  style?: StyleProp<ViewStyle>
 }
 
-const SubmitButton = ({ children, disabled }: ButtonProps) => {
+const SubmitButton = ({ children, disabled, style }: ButtonProps) => {
   return (
-    <TouchableOpacity
-      style={[styles.button, disabled ? styles.disabledButton : null]}
-      disabled={disabled}
+    <LinearGradient
+      style={[styles.gradient, style]}
+      colors={disabled ? ["gray", "gray"] : ["#9c3fe4", "#c65647"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      locations={[0.3, 1]}
     >
-      <Text style={[styles.text, disabled ? styles.disabledText : null]}>
-        {children}
-      </Text>
-    </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.button, disabled ? styles.disabledButton : null]}
+        disabled={disabled}
+      >
+        <Text style={[styles.text, disabled ? styles.disabledText : null]}>
+          {children}
+        </Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 };
 
 export default SubmitButton;
 
 const styles = StyleSheet.create({
-  button: {
+  gradient: {
     width: "100%",
-    // background: linear-gradient(99deg, #9c3fe4 0%, #c65647 100%);
+    borderRadius: 15,
   },
+  button: {},
   text: {
     fontSize: 17,
     fontWeight: "500",
     color: "#fff",
     paddingVertical: 12,
-    textAlign: "center"
+    textAlign: "center",
   },
   disabledButton: {},
   disabledText: {},
