@@ -23,15 +23,18 @@ const Input = ({ placeholder, value, setValue }: InputProps) => {
 export default Input;
 
 const styles = StyleSheet.create({
+  gradient: {
+    borderRadius: 8,
+  },
   input: {
+    width: "100%",
     fontSize: 14,
     fontWeight: "500",
-    color: "#a4a4a4",
-    borderColor: "#A4A4A4",
-    borderWidth: 1,
+    color: "#fff",
     paddingVertical: 17,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     maxHeight: 55,
-    borderRadius: 5,
+    borderRadius: 8,
+    flex: 1
   },
 });

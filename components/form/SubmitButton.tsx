@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "500",
     color: "#fff",
-    paddingVertical: 12,
+    paddingVertical: 14,
     textAlign: "center",
   },
   disabledButton: {},
