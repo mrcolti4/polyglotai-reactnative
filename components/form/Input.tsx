@@ -1,20 +1,28 @@
 import { StyleSheet, TextInput } from "react-native";
 import React from "react";
+import { Control, useController } from "react-hook-form";
+import { FormValues } from "@/types/FormValues";
 
 interface InputProps {
   placeholder: string;
-  value: string;
-  setValue: (value: string) => void;
+  name: "email" | "username" | "password";
+  control: Control<FormValues>;
 }
 
-const Input = ({ placeholder, value, setValue }: InputProps) => {
+const Input = ({ placeholder, name, control }: InputProps) => {
+  const { field } = useController({
+    control,
+    defaultValue: "",
+    name,
+  });
+
   return (
     <TextInput
       style={styles.input}
       placeholder={placeholder}
       placeholderTextColor="#a4a4a4"
-      value={value}
-      onChangeText={setValue}
+      value={field.value}
+      onChangeText={field.onChange}
       secureTextEntry={false}
     />
   );
@@ -35,6 +43,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     maxHeight: 55,
     borderRadius: 8,
-    flex: 1
+    flex: 1,
   },
 });

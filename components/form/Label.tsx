@@ -28,7 +28,7 @@ export default Label;
 
 const styles = StyleSheet.create({
   label: {
-    gap: 12,
+    gap: 5,
     width: "100%",
   },
   text: {

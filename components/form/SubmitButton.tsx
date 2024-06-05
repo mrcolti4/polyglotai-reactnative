@@ -1,14 +1,25 @@
-import { StyleProp, StyleSheet, StyleSheetProperties, Text, TouchableOpacity, View, ViewStyle } from "react-native";
+import {
+  GestureResponderEvent,
+  StyleProp,
+  StyleSheet,
+  StyleSheetProperties,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import { SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 
 interface ButtonProps {
+  onPress: (event: GestureResponderEvent) => void;
   children: React.ReactNode;
   disabled: boolean;
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>;
 }
 
-const SubmitButton = ({ children, disabled, style }: ButtonProps) => {
+const SubmitButton = ({ children, disabled, style, onPress }: ButtonProps) => {
   return (
     <LinearGradient
       style={[styles.gradient, style]}
@@ -18,6 +29,7 @@ const SubmitButton = ({ children, disabled, style }: ButtonProps) => {
       locations={[0.3, 1]}
     >
       <TouchableOpacity
+        onPress={onPress}
         style={[styles.button, disabled ? styles.disabledButton : null]}
         disabled={disabled}
       >
