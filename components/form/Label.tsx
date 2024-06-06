@@ -2,15 +2,17 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import React from "react";
 import { AppStyles } from "@/constants/globalVariables";
 import { Ionicons } from "@expo/vector-icons";
+import ShowPasswordBtn from "./ShowPasswordBtn";
 interface LabelProps {
   children: React.ReactNode;
   text: string;
   icon?: keyof typeof Ionicons.glyphMap;
+  isPassword?: boolean;
 }
 
 // const inputHeight = Dimensions.get("")
 
-const Label = ({ children, text, icon }: LabelProps) => {
+const Label = ({ children, text, icon, isPassword }: LabelProps) => {
   return (
     <View style={styles.label}>
       <Text style={styles.text}>{text}</Text>
@@ -19,6 +21,7 @@ const Label = ({ children, text, icon }: LabelProps) => {
           <Ionicons style={styles.icon} name={icon} size={20} color="white" />
         )}
         {children}
+        {isPassword && <ShowPasswordBtn />}
       </View>
     </View>
   );
@@ -38,10 +41,10 @@ const styles = StyleSheet.create({
     position: "relative",
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderColor: "#a4a4a4"
+    borderColor: "#a4a4a4",
   },
   icon: {
     verticalAlign: "middle",
-    alignItems: "center"
+    alignItems: "center",
   },
 });

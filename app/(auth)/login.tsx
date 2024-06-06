@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 import AuthView from "@/components/AuthView";
 import Form from "@/components/form/Form";
 import FormTitle from "@/components/form/FormTitle";
 import Label from "@/components/form/Label";
 import Input from "@/components/form/Input";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { FormValues } from "@/types/FormValues";
 import SubmitButton from "@/components/form/SubmitButton";
 import NavLink from "@/components/navigation/NavLink";

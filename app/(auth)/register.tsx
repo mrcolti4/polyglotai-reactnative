@@ -1,20 +1,29 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/config";
+
 import Input from "@/components/form/Input";
 import Label from "@/components/form/Label";
 import SubmitButton from "@/components/form/SubmitButton";
-import { SubmitHandler, useForm } from "react-hook-form";
 import NavLink from "@/components/navigation/NavLink";
 import AuthView from "@/components/AuthView";
 import Form from "@/components/form/Form";
 import FormTitle from "@/components/form/FormTitle";
-import { FormValues } from "@/types/FormValues";
 
+import { FormValues } from "@/types/FormValues";
+import { Ionicons } from "@expo/vector-icons";
 
 const Registration = () => {
   const { control, handleSubmit } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const userCreds = await createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password,
+    );
+    console.log(userCreds.user);
   };
 
   return (
@@ -36,6 +45,15 @@ const Registration = () => {
             control={control}
           />
         </Label>
+        <Label text="Your password" icon="key" isPassword={true}>
+          <Input
+            placeholder="**********"
+            name="password"
+            control={control}
+            hideInput={true}
+          />
+        </Label>
+
         <SubmitButton
           onPress={handleSubmit(onSubmit)}
           disabled={false}

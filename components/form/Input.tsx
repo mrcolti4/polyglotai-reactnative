@@ -7,9 +7,10 @@ interface InputProps {
   placeholder: string;
   name: "email" | "username" | "password";
   control: Control<FormValues>;
+  hideInput?: true | false;
 }
 
-const Input = ({ placeholder, name, control }: InputProps) => {
+const Input = ({ placeholder, name, control, hideInput }: InputProps) => {
   const { field } = useController({
     control,
     defaultValue: "",
@@ -23,7 +24,7 @@ const Input = ({ placeholder, name, control }: InputProps) => {
       placeholderTextColor="#a4a4a4"
       value={field.value}
       onChangeText={field.onChange}
-      secureTextEntry={false}
+      secureTextEntry={hideInput}
     />
   );
 };
