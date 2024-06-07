@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { TextInput } from "react-native-paper";
 
 import AuthView from "@/components/AuthView";
 import Form from "@/components/form/Form";
 import FormTitle from "@/components/form/FormTitle";
-import Label from "@/components/form/Label";
 import Input from "@/components/form/Input";
 import { FormValues } from "@/types/FormValues";
 import SubmitButton from "@/components/form/SubmitButton";
@@ -16,21 +16,27 @@ const Login = () => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
   };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <AuthView>
       <Form>
         <FormTitle>Log in</FormTitle>
-        <Label text="Email Address" icon="mail">
-          <Input
-            placeholder="youremail@mail.com"
-            name="email"
-            control={control}
-          />
-        </Label>
-        <Label text="Your password" icon="key">
-          <Input placeholder="***********" name="password" control={control} />
-        </Label>
+        <Input
+          name="email"
+          control={control}
+          label="Your email"
+          left={<TextInput.Icon icon="mail" size={20} color="white" />}
+        />
+        <Input
+          name="password"
+          control={control}
+          hideInput={true}
+          label="Password"
+          secureTextEntry={!showPassword}
+          left={<TextInput.Icon icon="key" size={20} color="white" />}
+          right={<TextInput.Icon icon={showPassword ? "eye" : "eye-off"} onPress={() => setShowPassword(!showPassword)}/>}
+        />
         <SubmitButton onPress={handleSubmit(onSubmit)} disabled={false}>
           Log in
         </SubmitButton>

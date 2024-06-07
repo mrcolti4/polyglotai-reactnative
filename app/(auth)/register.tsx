@@ -5,7 +5,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config";
 
 import Input from "@/components/form/Input";
-import Label from "@/components/form/Label";
 import SubmitButton from "@/components/form/SubmitButton";
 import NavLink from "@/components/navigation/NavLink";
 import AuthView from "@/components/AuthView";
@@ -14,6 +13,7 @@ import FormTitle from "@/components/form/FormTitle";
 
 import { FormValues } from "@/types/FormValues";
 import { Ionicons } from "@expo/vector-icons";
+import { TextInput } from "react-native-paper";
 
 const Registration = () => {
   const { control, handleSubmit } = useForm<FormValues>();
@@ -21,10 +21,11 @@ const Registration = () => {
     const userCreds = await createUserWithEmailAndPassword(
       auth,
       data.email,
-      data.password,
+      data.password
     );
     console.log(userCreds.user);
   };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <AuthView>
@@ -38,21 +39,21 @@ const Registration = () => {
       </View>
       <Form>
         <FormTitle>Get started free</FormTitle>
-        <Label text="Email Address" icon="mail">
-          <Input
-            placeholder="youremail@mail.com"
-            name="email"
-            control={control}
-          />
-        </Label>
-        <Label text="Your password" icon="key" isPassword={true}>
-          <Input
-            placeholder="**********"
-            name="password"
-            control={control}
-            hideInput={true}
-          />
-        </Label>
+        <Input
+          name="email"
+          control={control}
+          label="Your email"
+          left={<TextInput.Icon icon="mail" size={20} color="white" />}
+        />
+        <Input
+          name="password"
+          control={control}
+          hideInput={true}
+          label="Password"
+          secureTextEntry={!showPassword}
+          left={<TextInput.Icon icon="key" size={20} color="white" />}
+          right={<TextInput.Icon icon={showPassword ? "eye" : "eye-off"} onPress={() => setShowPassword(!showPassword)}/>}
+        />
 
         <SubmitButton
           onPress={handleSubmit(onSubmit)}
