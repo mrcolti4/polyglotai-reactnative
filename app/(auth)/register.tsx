@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { TextInput } from "react-native-paper";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/config";
 
 import Input from "@/components/form/Input";
 import SubmitButton from "@/components/form/SubmitButton";
@@ -11,9 +11,8 @@ import AuthView from "@/components/AuthView";
 import Form from "@/components/form/Form";
 import FormTitle from "@/components/form/FormTitle";
 
+import { auth } from "@/config";
 import { FormValues } from "@/types/FormValues";
-import { Ionicons } from "@expo/vector-icons";
-import { TextInput } from "react-native-paper";
 
 const Registration = () => {
   const { control, handleSubmit } = useForm<FormValues>();
