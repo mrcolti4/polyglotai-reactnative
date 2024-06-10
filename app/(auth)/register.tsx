@@ -11,20 +11,26 @@ import AuthView from "@/components/AuthView";
 import Form from "@/components/form/Form";
 import FormTitle from "@/components/form/FormTitle";
 
-import { auth } from "@/config";
 import { FormValues } from "@/types/FormValues";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { selectError } from "@/redux/root/selectors";
+import { CreateUser } from "@/types/auth";
+import { registerUserByEmail } from "@/redux/root/thunks";
 
 const Registration = () => {
-  const { control, handleSubmit } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const userCreds = await createUserWithEmailAndPassword(
-      auth,
-      data.email,
-      data.password
-    );
-    console.log(userCreds.user);
-  };
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const error = useSelector(selectError);
+  const { control, handleSubmit } = useForm<FormValues>();
+  const onSubmit: SubmitHandler<FormValues> = async ({
+    email,
+    password,
+  }: CreateUser) => {
+    dispatch(registerUserByEmail({ email, password }));
+  };
+  console.log(error);
+  
 
   return (
     <AuthView>
@@ -42,7 +48,7 @@ const Registration = () => {
           name="email"
           control={control}
           label="Your email"
-          left={<TextInput.Icon icon="mail" size={20} color="white" />}
+          left={<TextInput.Icon icon="mail" size={20} />}
         />
         <Input
           name="password"
@@ -50,8 +56,14 @@ const Registration = () => {
           hideInput={true}
           label="Password"
           secureTextEntry={!showPassword}
-          left={<TextInput.Icon icon="key" size={20} color="white" />}
-          right={<TextInput.Icon icon={showPassword ? "eye" : "eye-off"} onPress={() => setShowPassword(!showPassword)}/>}
+          left={<TextInput.Icon icon="key" size={20} />}
+          right={
+            <TextInput.Icon
+              icon={showPassword ? "eye" : "eye-off"}
+              size={20}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          }
         />
 
         <SubmitButton
