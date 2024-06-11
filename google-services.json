@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "995739796210",
+    "project_id": "polyglotai-76138",
+    "storage_bucket": "polyglotai-76138.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995739796210:android:18e24b922dda2b94e2066b",
+        "android_client_info": {
+          "package_name": "com.colti4.polyglotai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995739796210-mj021tt7vlqmjaq09q5m499878k0b17e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbBHOZnRce8HAE9w0q_NjZqMZG26j3HJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995739796210-mj021tt7vlqmjaq09q5m499878k0b17e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
