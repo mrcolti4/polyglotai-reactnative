@@ -20,7 +20,9 @@ export const registerUserByEmail = createAsyncThunk(
         data.email,
         data.password
       );
-      return user;
+      const token = await user.getIdToken();
+
+      return { user, token };
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {
@@ -44,7 +46,9 @@ export const loginWithEmail = createAsyncThunk(
         data.email,
         data.password
       );
-      return user;
+      const token = await user.getIdToken();
+
+      return { user, token };
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {

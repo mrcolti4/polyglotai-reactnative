@@ -15,6 +15,7 @@ import { rootReducer } from "./root/slice";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
+  whiteList: ["user"],
 };
 
 export const store = configureStore({
@@ -23,9 +24,10 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      // serializableCheck: {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      // },
+      serializableCheck: false,
     }),
 });
 

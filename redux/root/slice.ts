@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUserByEmail } from "./thunks";
+import { loginWithEmail, registerUserByEmail } from "./thunks";
 import { User } from "firebase/auth";
 import { handleError, handleSignUp } from "./handlers";
 
@@ -22,6 +22,8 @@ const rootSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(registerUserByEmail.fulfilled, handleSignUp);
     builder.addCase(registerUserByEmail.rejected, handleError);
+    builder.addCase(loginWithEmail.fulfilled, handleSignUp);
+    builder.addCase(loginWithEmail.rejected, handleError);
   },
 });
 
