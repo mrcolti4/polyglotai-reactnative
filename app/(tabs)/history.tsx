@@ -4,7 +4,7 @@ import React from 'react'
 const Tab = () => {
   return (
     <View>
-      <Text>Settings</Text>
+      <Text>History</Text>
     </View>
   )
 }

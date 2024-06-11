@@ -1,9 +1,22 @@
-import { Redirect } from "expo-router";
-import { useState } from "react";
-import { Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { View } from "react-native";
+import {
+  onAuthStateChanged,
+} from "firebase/auth";
+
+import { auth } from "@/config";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function Index() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      router.replace("(tabs)");
+    } else {
+      router.replace("/login");
+    }
+  });
 
   return (
     <View
@@ -11,13 +24,10 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#00224F"
       }}
     >
-      {isLoggedIn ? (
-        <Text>Edit app/index.tsx to edit this screen.</Text>
-      ) : (
-        <Redirect href="register" />
-      )}
+      <ActivityIndicator size="large" color="white"/>
     </View>
   );
 }

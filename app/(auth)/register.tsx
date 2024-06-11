@@ -29,8 +29,6 @@ const Registration = () => {
   }: CreateUser) => {
     dispatch(registerUserByEmail({ email, password }));
   };
-  console.log(error);
-  
 
   return (
     <AuthView>

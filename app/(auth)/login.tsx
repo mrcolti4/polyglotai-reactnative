@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TextInput } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,15 +13,12 @@ import { FormValues } from "@/types/FormValues";
 import SubmitButton from "@/components/form/SubmitButton";
 import NavLink from "@/components/navigation/NavLink";
 
-import { selectToken } from "@/redux/root/selectors";
-
 import { loginWithEmail } from "@/redux/root/thunks";
 import { AppDispatch } from "@/redux/store";
 import { CreateUser } from "@/types/auth";
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const token = useSelector(selectToken);
   const { control, handleSubmit } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async ({
     email,
@@ -29,7 +26,6 @@ const Login = () => {
   }: CreateUser) => {
     dispatch(loginWithEmail({ email, password }));
   };
-
   const [showPassword, setShowPassword] = useState(false);
 
   return (
